@@ -17,6 +17,7 @@
 #include "floaters.h"
 #include "exceptions.h"
 
+#include <algorithm>
 using namespace std;
 
 namespace final {
