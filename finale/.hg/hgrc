@@ -1,0 +1,4 @@
+[paths]
+default = http://msestak@mercurial.intuxication.org/hg/finale
+default-push = http://msestak@mercurial.intuxication.org/hg/finale
+

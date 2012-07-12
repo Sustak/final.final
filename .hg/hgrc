@@ -1,0 +1,7 @@
+[paths]
+default-push = http://mercurial.intuxication.org/hg/final_final
+default = http://mercurial.intuxication.org/hg/final_final
+
+[ui]
+username = msestak
+
