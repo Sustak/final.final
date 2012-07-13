@@ -30,18 +30,18 @@ private:
 	std::map< TDate, floating > dataseries;
 
 public:
-					TDataSeries() {}
+				TDataSeries() {}
 virtual				~TDataSeries() {}
 
 void				Add( const TDate& adate, floating avalue );
 void				Clear();
 
-virtual floating	GetValue( const TDate& adate ) const;
-virtual floating	GetValue( int month, int year ) const;
+virtual floating                GetValue( const TDate& adate ) const;
+virtual floating                GetValue( int month, int year ) const;
 
 }; // end of class TDataSeries
 
-typedef enum { OATi, OATe, BTPSe, DBRe, GGBe, TII } LinkerType;
+typedef enum { OATi, OATe, BTPSe, DBRe, GGBe, TII, SGBi, CANi, ACGBi } LinkerType;
 
 floating CPIIndexValue( LinkerType linkertype, const TDate& avaluedate, 
 	const TDataSeries& acpiseries );
