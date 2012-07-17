@@ -37,8 +37,8 @@ virtual			~TDataSeries() {}
 void			Add( const TDate& adate, floating avalue );
 void			Clear();
 
-virtual floating	GetValue( const TDate& adate ) const;
-virtual floating	GetValue( int month, int year ) const;
+virtual floating                GetValue( const TDate& adate ) const;
+virtual floating                GetValue( int month, int year ) const;
 
 }; // end of class TDataSeries
 
