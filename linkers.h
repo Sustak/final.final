@@ -18,6 +18,7 @@
 #define linkersH
 
 #include <map>
+#include "../utils/datetime.h"
 #include "defs.h"
 #include "calendar.h"
 
@@ -30,11 +31,11 @@ private:
 	std::map< TDate, floating > dataseries;
 
 public:
-					TDataSeries() {}
-virtual				~TDataSeries() {}
+			TDataSeries() {}
+virtual			~TDataSeries() {}
 
-void				Add( const TDate& adate, floating avalue );
-void				Clear();
+void			Add( const TDate& adate, floating avalue );
+void			Clear();
 
 virtual floating	GetValue( const TDate& adate ) const;
 virtual floating	GetValue( int month, int year ) const;
