@@ -42,7 +42,7 @@ virtual floating	GetValue( int month, int year ) const;
 
 }; // end of class TDataSeries
 
-typedef enum { OATi, OATe, BTPSe, DBRe, GGBe, TII } LinkerType;
+typedef enum { OATi, OATe, BTPSe, DBRe, GGBe, TII, SGBi, CANi, ACGBi } LinkerType;
 
 floating CPIIndexValue( LinkerType linkertype, const TDate& avaluedate, 
 	const TDataSeries& acpiseries );
