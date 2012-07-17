@@ -54,6 +54,7 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
+	${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/final \
 	${TESTDIR}/TestFiles/f1
 
 # C Compiler Flags
@@ -152,9 +153,19 @@ ${OBJECTDIR}/exceptions.o: exceptions.cpp
 
 # Build Test Targets
 .build-tests-conf: .build-conf ${TESTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/final: ${TESTDIR}/tests/testACGBi.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${LINK.cc}   -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/final $^ ${LDLIBSOPTIONS} 
+
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/newsimpletest.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
+
+
+${TESTDIR}/tests/testACGBi.o: tests/testACGBi.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${TESTDIR}/tests/testACGBi.o tests/testACGBi.cpp
 
 
 ${TESTDIR}/tests/newsimpletest.o: tests/newsimpletest.cpp 
@@ -336,6 +347,7 @@ ${OBJECTDIR}/exceptions_nomain.o: ${OBJECTDIR}/exceptions.o exceptions.cpp
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
+	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/final || true; \
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	else  \
 	    ./${TEST} || true; \

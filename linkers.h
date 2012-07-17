@@ -45,9 +45,10 @@ virtual floating	GetValue( int month, int year ) const;
 typedef enum { OATi, OATe, BTPSe, DBRe, GGBe, TII, SGBi, CANi, ACGBi } LinkerType;
 
 floating CPIIndexValue( LinkerType linkertype, const TDate& avaluedate, 
-	const TDataSeries& acpiseries );
+	const TDataSeries& acpiseries, int ainterestaccruesfrom=0, int afirstcoupondate=0 );
 floating CPIIndexRatio( LinkerType linkertype, const TDate& avaluedate,
-	const TDataSeries& acpiseries, floating abasecpiindexvalue );
+	const TDataSeries& acpiseries, floating abasecpiindexvalue,
+        int ainterestaccruesfrom=0, int afirstcoupondate=0 );
 
 } // end of namespace final
 

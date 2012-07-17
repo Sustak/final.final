@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="79">
+<configurationDescriptor version="82">
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="3">
@@ -19,9 +19,6 @@
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
       </dbx_gdbdebugger>
-      <gizmo_options version="3">
-        <configurationname>GizmoSimple</configurationname>
-      </gizmo_options>
       <nativedebugger version="1">
         <engine>gdb</engine>
       </nativedebugger>
@@ -29,7 +26,7 @@
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <runcommand>build/Debug/MinGW-Windows/tests/TestFiles/f2.exe</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -55,9 +52,6 @@
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
       </dbx_gdbdebugger>
-      <gizmo_options version="3">
-        <configurationname>GizmoSimple</configurationname>
-      </gizmo_options>
       <nativedebugger version="1">
         <engine>gdb</engine>
       </nativedebugger>
