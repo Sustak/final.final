@@ -23,15 +23,10 @@ namespace final {
         int ainterestaccruesfrom, int afirstcoupondate );
 }
 
-void testCPIIndexValueACGBi() {
-    
-    // this test replicates figures shown in excel sheet 
-    //   'acgb inflation linkers calcs.xls' found in the docs folder...
-    
-    TDate avaluedate = TDate(19,7,2012);
-    TDataSeries acpiseries;
-
-    acpiseries.Add(TDate(31, 12, 1990), 1.71);
+TDataSeries acpiseries;
+void initCPI()
+{
+   acpiseries.Add(TDate(31, 12, 1990), 1.71);
     acpiseries.Add(TDate(31, 3, 1991), 1.21);
     acpiseries.Add(TDate(30, 6, 1991), 0);
     acpiseries.Add(TDate(30, 9, 1991), 0.38);
@@ -117,7 +112,14 @@ void testCPIIndexValueACGBi() {
     acpiseries.Add(TDate(30, 9, 2011), 0.76);
     acpiseries.Add(TDate(31, 12, 2011), 0.31);
     acpiseries.Add(TDate(31, 3, 2012), 0.03);
+}
+
+void testCPIIndexValueACGBi() {
     
+    // this test replicates figures shown in excel sheet 
+    //   'acgb inflation linkers calcs.xls' found in the docs folder...
+    
+    TDate avaluedate = TDate(19,7,2012);
     int ainterestaccruesfrom = TDate(20,5,1994).Serial();
     int afirstcoupondate = TDate(20,8,1994).Serial();
     double result = CPIIndexValueACGBi(avaluedate, acpiseries, ainterestaccruesfrom, afirstcoupondate);

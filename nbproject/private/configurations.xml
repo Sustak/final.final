@@ -25,6 +25,7 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>build/Debug/MinGW-Windows/tests/TestFiles/f2.exe</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>build/Debug/MinGW-Windows/tests/TestFiles/f2.exe</runcommand>
         <rundir></rundir>

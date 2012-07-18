@@ -73,7 +73,7 @@ floating CPIIndexValueACGBi( const TDate& avaluedate, const TDataSeries& acpiser
     floating cpiChange = acpiseries.GetValue( month, year );
     floating capitalValue = Round( prevCapitalValue * (1.0+cpiChange/100.0), 2);
     
-    while( avaluedate<=cpnDate ) {
+    while( cpnDate<avaluedate ) {
         prevDate = cpnDate;
         cpnDate = cpnDate.EDate(3);
         month += 3;
@@ -86,11 +86,11 @@ floating CPIIndexValueACGBi( const TDate& avaluedate, const TDataSeries& acpiser
         capitalValue = Round( prevCapitalValue * (1.0+cpiChange/100.0), 2);
     }
     
-    floating cpiIndex = (avaluedate.Serial()-prevDate.Serial()) /
-            (cpnDate.Serial()-prevDate.Serial()) * (capitalValue-prevCapitalValue) +
-            prevCapitalValue;
+    floating cpiIndex = ((double)(avaluedate.Serial()-prevDate.Serial())) 
+            / ((double)(cpnDate.Serial()-prevDate.Serial()))
+            * (capitalValue-prevCapitalValue) + prevCapitalValue;
     
-    return cpiIndex;
+    return Round(cpiIndex,2);
 }
 
 floating CPIIndexValue( LinkerType linkertype, const TDate& avaluedate, 
