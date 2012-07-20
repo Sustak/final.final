@@ -86,11 +86,11 @@ floating CPIIndexValueACGBi( const TDate& avaluedate, const TDataSeries& acpiser
         capitalValue = Round( prevCapitalValue * (1.0+cpiChange/100.0), 2);
     }
     
-    floating cpiIndex = ((double)(avaluedate.Serial()-prevDate.Serial())) 
-            / ((double)(cpnDate.Serial()-prevDate.Serial()))
-            * (capitalValue-prevCapitalValue) + prevCapitalValue;
-    
-    return Round(cpiIndex,2);
+//    floating cpiIndex = ((double)(avaluedate.Serial()-prevDate.Serial())) 
+//            / ((double)(cpnDate.Serial()-prevDate.Serial()))
+//            * (capitalValue-prevCapitalValue) + prevCapitalValue;
+//    return Round(cpiIndex,2);
+    return capitalValue;
 }
 
 floating CPIIndexValue( LinkerType linkertype, const TDate& avaluedate, 
@@ -142,7 +142,7 @@ floating CPIIndexRatio( LinkerType linkertype, const TDate& avaluedate,
         floating ratio;
         
         if( linkertype = ACGBi ) {
-            ratio = utils::Round( value/100.0,2 );
+            ratio = value/100.0;
         }
         else {
             ratio = value / abasecpiindexvalue;

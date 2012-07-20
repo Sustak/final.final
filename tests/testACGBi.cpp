@@ -24,9 +24,11 @@ namespace final {
 }
 
 TDataSeries acpiseries;
-void initCPI()
+TBond* acgb4;
+
+void init()
 {
-   acpiseries.Add(TDate(31, 12, 1990), 1.71);
+    acpiseries.Add(TDate(31, 12, 1990), 1.71);
     acpiseries.Add(TDate(31, 3, 1991), 1.21);
     acpiseries.Add(TDate(30, 6, 1991), 0);
     acpiseries.Add(TDate(30, 9, 1991), 0.38);
@@ -112,6 +114,38 @@ void initCPI()
     acpiseries.Add(TDate(30, 9, 2011), 0.76);
     acpiseries.Add(TDate(31, 12, 2011), 0.31);
     acpiseries.Add(TDate(31, 3, 2012), 0.03);
+
+    acgb4 = (TBond*) GetSecurity(
+            "GENERIC",                  // ticker
+            0.04,                       // coupon
+            TDate(20,8,2012).Serial(),  // maturity
+            TDate(20,5,1994).Serial(),  // issued
+            4,                          // frequency
+            1,                          // basis
+            TDate(20,5,1994).Serial(),  // interest accrues from
+            TDate(20,8,1994).Serial(),  // first coupon
+            100                         // redemption
+            );
+
+}
+
+void testACGB4Accrued( const TDate& settle, double expected )
+{
+    double accrInt = acgb4->AccruedInterest(settle);
+    double inflIdx = CPIIndexRatio(ACGBi,settle,acpiseries,100.0,
+            acgb4->InterestAccrualDate().Serial(),
+            acgb4->FirstCouponDate().Serial() );
+    
+    double result = Round(accrInt*inflIdx,3);
+    
+    if( CompareDoubles( result, expected ) !=0 ) {
+        std::cout << "%TEST_FAILED% time=0 testname=testCPIIndexValueACGBi (testACGBi) "
+                  << "message=accrued interest expected " << expected << ", got " << result
+                  << " (settlement " << settle.Day() << "." << settle.Month() << "." << settle.Year()
+                  << ", nominal accrued " << accrInt
+                  << ", inflation ratio " << inflIdx << ")"
+                  << std::endl;
+    }
 }
 
 void testCPIIndexValueACGBi() {
@@ -123,13 +157,20 @@ void testCPIIndexValueACGBi() {
     int ainterestaccruesfrom = TDate(20,5,1994).Serial();
     int afirstcoupondate = TDate(20,8,1994).Serial();
     double result = CPIIndexValueACGBi(avaluedate, acpiseries, ainterestaccruesfrom, afirstcoupondate);
-    if ( result != 163.66 ) {
+    if ( result != 163.68 ) {
         std::cout << "%TEST_FAILED% time=0 testname=testCPIIndexValueACGBi (testACGBi) "
-                  << "message=expected 163.66, got " << result << std::endl;
+                  << "message=expected 163.68, got " << result << std::endl;
     }
+    
+    // lets test accrued interest (a product of nominal accrued interest and
+    // current interpolated inflation index
+    testACGB4Accrued( TDate(1,1,2011), 0.719 );
+    
 }
 
 int main(int argc, char** argv) {
+    init();
+    
     std::cout << "%SUITE_STARTING% testACGBi" << std::endl;
     std::cout << "%SUITE_STARTED%" << std::endl;
 
