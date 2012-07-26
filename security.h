@@ -67,6 +67,7 @@ typedef enum {
   SEC_JGB = 19,
   SEC_ACGB = 20,
   SEC_ACTB = 21,
+  SEC_ACGBi = 22,
   SEC_JGTB = 50,
   SEC_USB = 51
 } TSecurityModel;

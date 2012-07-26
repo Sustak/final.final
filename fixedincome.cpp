@@ -195,6 +195,17 @@ TSecurity* GetSecurity( const TString& aticker, floating acoupon, int amaturity,
     return new TACGB( maturity, issued, intaccr, firstcpn, abasis, acoupon, afrequency, aredemption );
   }
 
+  if( aticker=="ACGBi" )
+  {
+    if( afrequency==-1 )
+      afrequency = 2;
+    if( abasis==-1 )
+      abasis = 1;
+
+    return new TACGBi( maturity, issued, intaccr, firstcpn, abasis, acoupon, afrequency, aredemption, NULL );
+  }
+
+  
   if( IsZero(acoupon) )
   {
     if( aticker=="B" )
@@ -336,7 +347,7 @@ floating Price( const TDate& asettle, const TDate& amaturity, floating acoupon,
 
   bnd = new TBond( amaturity, issued, issued,
                    NextCouponDate( issued, amaturity, afrequency, abasis ),
-                   abasis, acoupon, afrequency );
+                   abasis, acoupon, afrequency, aredem );
   result = bnd->Price( asettle, aytm );
   delete bnd;
 
@@ -355,7 +366,7 @@ floating TruePrice( const TDate& asettle, const TDate& amaturity, floating acoup
 
   bnd = new TBond( amaturity, issued, issued,
                    NextCouponDate( issued, amaturity, afrequency, abasis ),
-                   abasis, acoupon, afrequency );
+                   abasis, acoupon, afrequency, aredem );
   if( cal )
     bnd->SetCalendar( cal );
   result = bnd->TruePrice( asettle, aytm );
@@ -373,9 +384,10 @@ floating Yield( const TDate& asettle, const TDate& amaturity, floating acoupon,
 
   issued = PrevCouponDate( asettle, amaturity, afrequency, abasis );
 
+  // TODO : všechno schovat do try {} catch (...) bloku
   bnd = new TBond( amaturity, issued, issued,
                    NextCouponDate( issued, amaturity, afrequency, abasis ),
-                   abasis, acoupon, afrequency );
+                   abasis, acoupon, afrequency, aredem );
   result = bnd->Yield( asettle, aprice );
   delete bnd;
 
@@ -394,7 +406,7 @@ floating TrueYield( const TDate& asettle, const TDate& amaturity, floating acoup
 
   bnd = new TBond( amaturity, issued, issued,
                    NextCouponDate( issued, amaturity, afrequency, abasis ),
-                   abasis, acoupon, afrequency );
+                   abasis, acoupon, afrequency, aredem );
   if( cal )
     bnd->SetCalendar( cal );
   result = bnd->TrueYield( asettle, aprice );

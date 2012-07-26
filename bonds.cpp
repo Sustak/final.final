@@ -22,7 +22,7 @@
 #include "fixedincome.h"
 
 namespace final {
-
+    
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -1304,7 +1304,7 @@ TACGB::TACGB( const TDate& amaturity, const TDate& aissued,
               int areadjust ) :
   TBond(amaturity,aissued,aintaccr,afirstcpn,abasis,acoupon,afrequency,aredeem,areadjust)
 {
-        exdivdays = 7;
+    exdivdays = 7;
 }
 
 TACGB::TACGB( const TDate& amaturity, const TDate& aissued,
@@ -1329,6 +1329,126 @@ floating TACGB::ConvPrice( const TDate& asettle, floating aytm, int around ) con
     else {
         return Round( Price( asettle, aytm ), 3 );
     }
+}
+
+void TACGB::ExDivDate(const TDate& asettle, TDate& aexdivdate) const {
+
+  asettle.Validate();
+  if( asettle.Serial()<issued.Serial() || asettle.Serial()>maturity.Serial() )
+    throw TExInvalidSettlement( asettle );
+
+  TDate    nextcpn;
+  int      i;
+
+  if( asettle==maturity )
+    nextcpn = maturity;
+  else
+  {
+    i = 1;
+    while( i<ncashflows && asettle>=cashflow_dates[i] ) i++;
+    nextcpn = cashflow_dates[i];
+  }
+
+  if( exdivdays==0 )
+    aexdivdate = nextcpn;
+  else
+    aexdivdate = TDate( nextcpn.Serial()-7 );
+  
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+TACGBi::TACGBi( const TDate& amaturity, const TDate& aissued,
+              const TDate& aintaccr, const TDate& afirstcpn, int abasis,
+              floating acoupon, int afrequency, floating aredeem,
+              TDataSeries* acpi,
+              int areadjust ) :
+  TBond(amaturity,aissued,aintaccr,afirstcpn,abasis,acoupon,afrequency,aredeem,areadjust)
+{
+    exdivdays = 7;
+    cpi = acpi;
+}
+
+TACGBi::TACGBi( const TDate& amaturity, const TDate& aissued,
+              const TDate& aintaccr, const TDate& afirstcpn, int abasis,
+              floating acoupon, int afrequency, floating aredeem,
+              TDataSeries* acpi ) :
+  TBond(amaturity,aissued,aintaccr,afirstcpn,abasis,acoupon,afrequency,aredeem)
+{
+    exdivdays = 7;
+    cpi = acpi;
+}
+
+void TACGBi::SetCPI(TDataSeries* acpi) {
+    cpi = acpi;
+}
+
+void TACGBi::ExDivDate(const TDate& asettle, TDate& aexdivdate) const {
+
+  asettle.Validate();
+  if( asettle.Serial()<issued.Serial() || asettle.Serial()>maturity.Serial() )
+    throw TExInvalidSettlement( asettle );
+
+  TDate    nextcpn;
+  int      i;
+
+  if( asettle==maturity )
+    nextcpn = maturity;
+  else
+  {
+    i = 1;
+    while( i<ncashflows && asettle>=cashflow_dates[i] ) i++;
+    nextcpn = cashflow_dates[i];
+  }
+
+  if( exdivdays==0 )
+    aexdivdate = nextcpn;
+  else
+    aexdivdate = TDate( nextcpn.Serial()-7 );
+  
+}
+
+floating TACGBi::AccruedInterest( const TDate& asettle ) const
+{
+    if( !cpi ) {
+        throw TExFINAL("Failed to calculate accrued interest of an inflation linked bond. No CPI index provided.");
+    }
+    
+    floating cpiRatio = final::CPIIndexRatio( ACGBi, asettle, *cpi, 100.0,
+            InterestAccrualDate().Serial(),
+            FirstCouponDate().Serial() );
+    
+    floating accrued = TBond::AccruedInterest( asettle );
+
+    return Round( accrued*cpiRatio, 3 );
+}
+
+floating TACGBi::ConvPrice( const TDate& asettle, floating aytm, int around ) const
+{
+    floating accrued = AccruedInterest( asettle );
+    floating cpiRatio = CPIIndexRatio(ACGBi,asettle,*cpi,100.0,
+            InterestAccrualDate().Serial(), FirstCouponDate().Serial() );
+    floating price = final::Price( asettle, maturity, coupon/100.0 * cpiRatio,
+            aytm, 100.0 * cpiRatio, frequency, basis );
+        
+    if( around==false )
+        return price + accrued;
+    else
+        return Round(price+accrued,3);
+}
+
+floating TACGBi::ConvYield(const TDate& asettle, double aprice, int around) const
+{
+    floating accrued = AccruedInterest( asettle );
+    floating cpiRatio = CPIIndexRatio(ACGBi,asettle,*cpi,100.0,
+            InterestAccrualDate().Serial(), FirstCouponDate().Serial() );
+    floating yield = final::Yield( asettle, maturity, coupon/100.0 * cpiRatio, aprice - accrued, 
+            100.0 * cpiRatio, frequency, basis );
+
+    if( around==false )
+        return yield;
+    else
+        return Round(yield,4);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

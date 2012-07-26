@@ -34,7 +34,8 @@
 using namespace utils;
 
 namespace final {
-
+#pragma GCC diagnostic ignored "-Wwrite-strings"
+    
 class TZeroCpn: public TSecurity
 {
 public:

@@ -34,7 +34,9 @@
 
 #include "defs.h"
 #include "security.h"
+#include "linkers.h"
 
+#pragma GCC diagnostic ignored "-Wwrite-strings"
 namespace final {
 
 class TBond: public TSecurity
@@ -355,12 +357,37 @@ public:
 
   virtual floating ConvPrice( const TDate& asettle, floating aytm, int around=true ) const;
   virtual floating AccruedInterest( const TDate& asettle ) const;
-  
+
+  virtual void     ExDivDate( const TDate& asettle, TDate& aexdivdate ) const;
+
   virtual char*    SecurityType() const { return "Australian government bond (ACGB)"; }
   virtual int      SecurityTypeNumber() const { return SEC_ACGB; }
 };
 
-
+class TACGBi : public TBond
+{
+  TDataSeries*     cpi;
+protected:
+                   TACGBi( const TDate& amaturity, const TDate& aissued,
+                          const TDate& aintaccr, const TDate& afirscpn, int abasis,
+                          floating acoupon, int afrequency, floating aredeem,
+                          TDataSeries* acpi,
+                          int readjust );
+public:
+                   TACGBi( const TDate& amaturity, const TDate& aissued,
+                          const TDate& aintaccr, const TDate& afirscpn, int abasis,
+                          floating acoupon, int afrequency=1, floating aredeem=100.0,
+                          TDataSeries* acpi=NULL );
+  virtual void     SetCPI( TDataSeries* acpi );
+  virtual void     ExDivDate( const TDate& asettle, TDate& aexdivdate ) const;
+  
+  virtual floating ConvPrice( const TDate& asettle, floating aytm, int around=true ) const;
+  virtual floating ConvYield( const TDate& asettle, floating aytm, int around=true ) const;
+  virtual floating AccruedInterest( const TDate& asettle ) const;
+  
+  virtual char*    SecurityType() const { return "Australian government inflation linked bond (ACGB)"; }
+  virtual int      SecurityTypeNumber() const { return SEC_ACGBi; }    
+};
 
 } // end of namespace final
 
