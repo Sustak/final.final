@@ -10,7 +10,7 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects>
-                <make-dep-project>../utils</make-dep-project>
+                <make-dep-project>D:/projects/git/utils</make-dep-project>
             </make-dep-projects>
             <sourceRootList/>
             <confList>
@@ -23,6 +23,9 @@
                     <type>3</type>
                 </confElem>
             </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
         </data>
     </configuration>
 </project>

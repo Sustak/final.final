@@ -118,7 +118,7 @@ floating CPIIndexValue( LinkerType linkertype, const TDate& avaluedate,
                                         / ( floating (endcurrentmonth.Day()) )
                                         * ( value2-value3 ) + value3;
 
-    if( linkertype == OATe or linkertype == OATi ) {
+    if( linkertype == OATe || linkertype == OATi ) {
 
             // bez zaokrouhlovani hodnot CPI nefunguji napr. tyto pripady
             // Date: 14.10.06  IndexValue:     102.4019354839  IndexRatio:     1.0247000000
@@ -141,7 +141,7 @@ floating CPIIndexRatio( LinkerType linkertype, const TDate& avaluedate,
                                         ainterestaccruesfrom, afirstcoupondate );        
         floating ratio;
         
-        if( linkertype = ACGBi ) {
+        if( linkertype == ACGBi ) {
             ratio = value/100.0;
         }
         else {

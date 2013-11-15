@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc.exe
-CCC=g++.exe
-CXX=g++.exe
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
-AS=as.exe
+AS=as
 
 # Macros
-CND_PLATFORM=MinGW-Windows
+CND_PLATFORM=Cygwin_4.x-Windows
 CND_DLIB_EXT=dll
 CND_CONF=Debug
 CND_DISTDIR=dist
@@ -35,25 +35,25 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/floaters.o \
-	${OBJECTDIR}/defs.o \
-	${OBJECTDIR}/coupons.o \
-	${OBJECTDIR}/security.o \
-	${OBJECTDIR}/calendar.o \
-	${OBJECTDIR}/linkers.o \
-	${OBJECTDIR}/yc.o \
 	${OBJECTDIR}/bonds.o \
-	${OBJECTDIR}/moneymarket.o \
-	${OBJECTDIR}/utils.o \
-	${OBJECTDIR}/fixedincome.o \
+	${OBJECTDIR}/calendar.o \
 	${OBJECTDIR}/conventions.o \
-	${OBJECTDIR}/exceptions.o
+	${OBJECTDIR}/coupons.o \
+	${OBJECTDIR}/defs.o \
+	${OBJECTDIR}/exceptions.o \
+	${OBJECTDIR}/fixedincome.o \
+	${OBJECTDIR}/floaters.o \
+	${OBJECTDIR}/linkers.o \
+	${OBJECTDIR}/moneymarket.o \
+	${OBJECTDIR}/security.o \
+	${OBJECTDIR}/yc.o
 
 # Test Directory
 TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
+	${TESTDIR}/TestFiles/f3 \
 	${TESTDIR}/TestFiles/f2 \
 	${TESTDIR}/TestFiles/f1
 
@@ -83,83 +83,89 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libfinal.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libfinal.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libfinal.a
 
-${OBJECTDIR}/floaters.o: floaters.cpp 
+${OBJECTDIR}/bonds.o: bonds.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/floaters.o floaters.cpp
-
-${OBJECTDIR}/defs.o: defs.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/defs.o defs.cpp
-
-${OBJECTDIR}/coupons.o: coupons.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/coupons.o coupons.cpp
-
-${OBJECTDIR}/security.o: security.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/security.o security.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/bonds.o bonds.cpp
 
 ${OBJECTDIR}/calendar.o: calendar.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/calendar.o calendar.cpp
 
-${OBJECTDIR}/linkers.o: linkers.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/linkers.o linkers.cpp
-
-${OBJECTDIR}/yc.o: yc.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/yc.o yc.cpp
-
-${OBJECTDIR}/bonds.o: bonds.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/bonds.o bonds.cpp
-
-${OBJECTDIR}/moneymarket.o: moneymarket.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/moneymarket.o moneymarket.cpp
-
-${OBJECTDIR}/utils.o: utils.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/utils.o utils.cpp
-
-${OBJECTDIR}/fixedincome.o: fixedincome.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/fixedincome.o fixedincome.cpp
-
 ${OBJECTDIR}/conventions.o: conventions.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/conventions.o conventions.cpp
+
+${OBJECTDIR}/coupons.o: coupons.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/coupons.o coupons.cpp
+
+${OBJECTDIR}/defs.o: defs.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/defs.o defs.cpp
 
 ${OBJECTDIR}/exceptions.o: exceptions.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/exceptions.o exceptions.cpp
 
+${OBJECTDIR}/fixedincome.o: fixedincome.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/fixedincome.o fixedincome.cpp
+
+${OBJECTDIR}/floaters.o: floaters.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/floaters.o floaters.cpp
+
+${OBJECTDIR}/linkers.o: linkers.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/linkers.o linkers.cpp
+
+${OBJECTDIR}/moneymarket.o: moneymarket.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/moneymarket.o moneymarket.cpp
+
+${OBJECTDIR}/security.o: security.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/security.o security.cpp
+
+${OBJECTDIR}/yc.o: yc.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/yc.o yc.cpp
+
 # Subprojects
 .build-subprojects:
+	cd D\:/projects/git/utils && ${MAKE}  -f Makefile CONF=Debug
 
 # Build Test Targets
 .build-tests-conf: .build-conf ${TESTFILES}
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/_ext/356306577/testACGB.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} D\:/projects/git/utils/dist/Debug/Cygwin_4.x-Windows/libutils.a 
+
 ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/testACGBi.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} 
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} D\:/projects/git/utils/dist/Debug/Cygwin_4.x-Windows/libutils.a 
 
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/newsimpletest.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} D\:/projects/git/utils/dist/Debug/Cygwin_4.x-Windows/libutils.a 
+
+
+${TESTDIR}/_ext/356306577/testACGB.o: /cygdrive/D/projects/git/final/tests/testACGB.cpp 
+	${MKDIR} -p ${TESTDIR}/_ext/356306577
+	${RM} $@.d
+	$(COMPILE.cc) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/356306577/testACGB.o /cygdrive/D/projects/git/final/tests/testACGB.cpp
 
 
 ${TESTDIR}/tests/testACGBi.o: tests/testACGBi.cpp 
@@ -174,56 +180,17 @@ ${TESTDIR}/tests/newsimpletest.o: tests/newsimpletest.cpp
 	$(COMPILE.cc) -g -I. -I. -I. -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/newsimpletest.o tests/newsimpletest.cpp
 
 
-${OBJECTDIR}/floaters_nomain.o: ${OBJECTDIR}/floaters.o floaters.cpp 
+${OBJECTDIR}/bonds_nomain.o: ${OBJECTDIR}/bonds.o bonds.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/floaters.o`; \
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/bonds.o`; \
 	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/floaters_nomain.o floaters.cpp;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/bonds_nomain.o bonds.cpp;\
 	else  \
-	    ${CP} ${OBJECTDIR}/floaters.o ${OBJECTDIR}/floaters_nomain.o;\
-	fi
-
-${OBJECTDIR}/defs_nomain.o: ${OBJECTDIR}/defs.o defs.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/defs.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/defs_nomain.o defs.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/defs.o ${OBJECTDIR}/defs_nomain.o;\
-	fi
-
-${OBJECTDIR}/coupons_nomain.o: ${OBJECTDIR}/coupons.o coupons.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/coupons.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/coupons_nomain.o coupons.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/coupons.o ${OBJECTDIR}/coupons_nomain.o;\
-	fi
-
-${OBJECTDIR}/security_nomain.o: ${OBJECTDIR}/security.o security.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/security.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/security_nomain.o security.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/security.o ${OBJECTDIR}/security_nomain.o;\
+	    ${CP} ${OBJECTDIR}/bonds.o ${OBJECTDIR}/bonds_nomain.o;\
 	fi
 
 ${OBJECTDIR}/calendar_nomain.o: ${OBJECTDIR}/calendar.o calendar.cpp 
@@ -239,84 +206,6 @@ ${OBJECTDIR}/calendar_nomain.o: ${OBJECTDIR}/calendar.o calendar.cpp
 	    ${CP} ${OBJECTDIR}/calendar.o ${OBJECTDIR}/calendar_nomain.o;\
 	fi
 
-${OBJECTDIR}/linkers_nomain.o: ${OBJECTDIR}/linkers.o linkers.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/linkers.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/linkers_nomain.o linkers.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/linkers.o ${OBJECTDIR}/linkers_nomain.o;\
-	fi
-
-${OBJECTDIR}/yc_nomain.o: ${OBJECTDIR}/yc.o yc.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/yc.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/yc_nomain.o yc.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/yc.o ${OBJECTDIR}/yc_nomain.o;\
-	fi
-
-${OBJECTDIR}/bonds_nomain.o: ${OBJECTDIR}/bonds.o bonds.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/bonds.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/bonds_nomain.o bonds.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/bonds.o ${OBJECTDIR}/bonds_nomain.o;\
-	fi
-
-${OBJECTDIR}/moneymarket_nomain.o: ${OBJECTDIR}/moneymarket.o moneymarket.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/moneymarket.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/moneymarket_nomain.o moneymarket.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/moneymarket.o ${OBJECTDIR}/moneymarket_nomain.o;\
-	fi
-
-${OBJECTDIR}/utils_nomain.o: ${OBJECTDIR}/utils.o utils.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/utils.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/utils_nomain.o utils.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/utils.o ${OBJECTDIR}/utils_nomain.o;\
-	fi
-
-${OBJECTDIR}/fixedincome_nomain.o: ${OBJECTDIR}/fixedincome.o fixedincome.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/fixedincome.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} $@.d;\
-	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/fixedincome_nomain.o fixedincome.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/fixedincome.o ${OBJECTDIR}/fixedincome_nomain.o;\
-	fi
-
 ${OBJECTDIR}/conventions_nomain.o: ${OBJECTDIR}/conventions.o conventions.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/conventions.o`; \
@@ -328,6 +217,32 @@ ${OBJECTDIR}/conventions_nomain.o: ${OBJECTDIR}/conventions.o conventions.cpp
 	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/conventions_nomain.o conventions.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/conventions.o ${OBJECTDIR}/conventions_nomain.o;\
+	fi
+
+${OBJECTDIR}/coupons_nomain.o: ${OBJECTDIR}/coupons.o coupons.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/coupons.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/coupons_nomain.o coupons.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/coupons.o ${OBJECTDIR}/coupons_nomain.o;\
+	fi
+
+${OBJECTDIR}/defs_nomain.o: ${OBJECTDIR}/defs.o defs.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/defs.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/defs_nomain.o defs.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/defs.o ${OBJECTDIR}/defs_nomain.o;\
 	fi
 
 ${OBJECTDIR}/exceptions_nomain.o: ${OBJECTDIR}/exceptions.o exceptions.cpp 
@@ -343,10 +258,89 @@ ${OBJECTDIR}/exceptions_nomain.o: ${OBJECTDIR}/exceptions.o exceptions.cpp
 	    ${CP} ${OBJECTDIR}/exceptions.o ${OBJECTDIR}/exceptions_nomain.o;\
 	fi
 
+${OBJECTDIR}/fixedincome_nomain.o: ${OBJECTDIR}/fixedincome.o fixedincome.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/fixedincome.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/fixedincome_nomain.o fixedincome.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/fixedincome.o ${OBJECTDIR}/fixedincome_nomain.o;\
+	fi
+
+${OBJECTDIR}/floaters_nomain.o: ${OBJECTDIR}/floaters.o floaters.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/floaters.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/floaters_nomain.o floaters.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/floaters.o ${OBJECTDIR}/floaters_nomain.o;\
+	fi
+
+${OBJECTDIR}/linkers_nomain.o: ${OBJECTDIR}/linkers.o linkers.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/linkers.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/linkers_nomain.o linkers.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/linkers.o ${OBJECTDIR}/linkers_nomain.o;\
+	fi
+
+${OBJECTDIR}/moneymarket_nomain.o: ${OBJECTDIR}/moneymarket.o moneymarket.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/moneymarket.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/moneymarket_nomain.o moneymarket.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/moneymarket.o ${OBJECTDIR}/moneymarket_nomain.o;\
+	fi
+
+${OBJECTDIR}/security_nomain.o: ${OBJECTDIR}/security.o security.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/security.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/security_nomain.o security.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/security.o ${OBJECTDIR}/security_nomain.o;\
+	fi
+
+${OBJECTDIR}/yc_nomain.o: ${OBJECTDIR}/yc.o yc.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/yc.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/yc_nomain.o yc.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/yc.o ${OBJECTDIR}/yc_nomain.o;\
+	fi
+
 # Run Test Targets
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
+	    ${TESTDIR}/TestFiles/f3 || true; \
 	    ${TESTDIR}/TestFiles/f2 || true; \
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	else  \
@@ -360,6 +354,7 @@ ${OBJECTDIR}/exceptions_nomain.o: ${OBJECTDIR}/exceptions.o exceptions.cpp
 
 # Subprojects
 .clean-subprojects:
+	cd D\:/projects/git/utils && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

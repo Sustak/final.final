@@ -58,6 +58,51 @@ void test1() {
     std::cout << "%TEST_PASSED%";
 }
 
+void testKBN1125_0518() {
+
+    TSecurity *sec;
+
+    try {
+        sec = GetSecurity(
+            "KBN",                      // ticker
+            0.01125,                    // coupon rate
+            TDate(23,5,2018).Serial(),  // maturity date
+            TDate(23,5,2013).Serial(),  // issue date
+            2,                          // coupon frequency
+            ISMA_30_360,                // daycount basis
+            TDate(23,5,2013).Serial(),  // interest accrues from
+            TDate(23,11,2013).Serial(), // first coupon date
+            100.0                       // redemption amount
+            );
+
+        double accrued = sec->AccruedInterest( TDate(14,11,2013) );
+        double accruedExpected = 0.534375;
+        
+        if( CompareDoubles( accrued, accruedExpected ) != 0 ) {
+                std::cout << "%TEST_FAILED% time=0 testname=testKBN1125_0518 (simpleBondTest) message=accrued interest calculation failed, "
+                          << "expected: " << accruedExpected
+                          << " got: " << accrued
+                          << std::endl;
+                return;
+        }
+    }
+    catch( TExFINAL &ex ) {
+        std::cout << "%TEST_FAILED% time=0 testname=testKBN1125_0518 (simpleBondTest) message="
+                  << ex.Message.c_str()
+                  << std::endl;
+        return;
+    }
+    catch( ... ) {
+        std::cout << "%TEST_FAILED% time=0 testname=testKBN1125_0518 (simpleBondTest) message="
+                  << "unknown error"
+                  << std::endl;
+        return;
+    }
+    
+    std::cout << "%TEST_PASSED%";
+    
+}
+
 void testACGB() {
 
     // std::cout << "simpleBondTest test 1" << std::endl;
@@ -169,6 +214,10 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% testACTB (simpleBondTest)\n" << std::endl;
     testACTB();
     std::cout << "%TEST_FINISHED% time=0 testACTB (simpleBondTest)" << std::endl;
+
+    std::cout << "%TEST_STARTED% testKBN1125_0518 (simpleBondTest)\n" << std::endl;
+    testKBN1125_0518();
+    std::cout << "%TEST_FINISHED% time=0 testKBN1125_0518 (simpleBondTest)" << std::endl;
 
     std::cout << "%SUITE_FINISHED% time=0" << std::endl;
 
