@@ -33,7 +33,7 @@ void init() {
 void testAccrued() {
     std::cout << "testACGB test accrued interest" << std::endl;
         
-    double accruedExpected = 2.844;
+    double accruedExpected = -0.031;
     TDate settlementDate(13,11,2013);
     double accrued = sec->AccruedInterest(settlementDate);
 
@@ -46,11 +46,6 @@ void testAccrued() {
     }
 }
 
-void test2() {
-    std::cout << "testACGB test 2" << std::endl;
-    std::cout << "%TEST_FAILED% time=0 testname=test2 (testACGB) message=error message sample" << std::endl;
-}
-
 int main(int argc, char** argv) {
     std::cout << "%SUITE_STARTING% testACGB" << std::endl;
     std::cout << "%SUITE_STARTED%" << std::endl;
@@ -61,9 +56,9 @@ int main(int argc, char** argv) {
         testAccrued();
         std::cout << "%TEST_FINISHED% time=0 testAccrued (testACGB)" << std::endl;
 
-        std::cout << "%TEST_STARTED% test2 (testACGB)\n" << std::endl;
-        test2();
-        std::cout << "%TEST_FINISHED% time=0 test2 (testACGB)" << std::endl;
+//        std::cout << "%TEST_STARTED% test2 (testACGB)\n" << std::endl;
+//        test2();
+//        std::cout << "%TEST_FINISHED% time=0 test2 (testACGB)" << std::endl;
     }
     std::cout << "%SUITE_FINISHED% time=0" << std::endl;
     return (EXIT_SUCCESS);

@@ -36,7 +36,7 @@ TString TSecurity::SecurityDescriptor() const
 {
   TString ret = TString(SEC_DES_SECTYPE) + TString(":") + TString( SecurityType() ) + TString(",");
   ret += TString(SEC_DES_MATURITY) + TString(":") + maturity.DateString() + TString(",");
-  ret += TString(SEC_DES_ISSUED) + TString(":") + maturity.DateString() + TString(",");
+  ret += TString(SEC_DES_ISSUED) + TString(":") + issued.DateString() + TString(",");
   ret += TString(SEC_DES_BASIS) + TString(":") + TString(basis) + TString(",");
   return ret;
 }

@@ -36,7 +36,41 @@
       <itemPath>linkers.cpp</itemPath>
       <itemPath>moneymarket.cpp</itemPath>
       <itemPath>security.cpp</itemPath>
+      <itemPath>utils.cpp</itemPath>
       <itemPath>yc.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f4"
+                     displayName="Simple Bond Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/newsimpletest.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="testACGB" projectFiles="true" kind="TEST">
+        <itemPath>tests/testACGB.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3"
+                     displayName="testACGBi"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/testACGBi.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2"
+                     displayName="testKBN1.125 05/18"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/testKBN1125_0518.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>README.md</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -46,19 +80,16 @@
                      displayName="ACGB test"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>D:/projects/git/final/tests/testACGB.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2"
                      displayName="ACGBi test"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>tests/testACGBi.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f1"
                      displayName="Simple Bond Test"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>tests/newsimpletest.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -80,24 +111,7 @@
       <compileType>
         <archiverTool>
         </archiverTool>
-        <requiredProjects>
-          <makeArtifact PL="D:/projects/git/utils"
-                        CT="3"
-                        CN="Debug"
-                        AC="true"
-                        BL="true"
-                        WD="D:/projects/git/utils"
-                        BC="${MAKE}  -f Makefile CONF=Debug"
-                        CC="${MAKE}  -f Makefile CONF=Debug clean"
-                        OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.a">
-          </makeArtifact>
-        </requiredProjects>
       </compileType>
-      <item path="D:/projects/git/final/tests/testACGB.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="bonds.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bonds.h" ex="false" tool="3" flavor2="0">
@@ -129,10 +143,12 @@
             <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
+            <pElem>.</pElem>
           </incDir>
         </cTool>
         <ccTool>
           <incDir>
+            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
@@ -141,52 +157,43 @@
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f1</output>
-          <linkerLibItems>
-            <linkerLibProjectItem>
-              <makeArtifact PL="D:/projects/git/utils"
-                            CT="3"
-                            CN="Debug"
-                            AC="true"
-                            BL="false"
-                            WD="D:/projects/git/utils"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.a">
-              </makeArtifact>
-            </linkerLibProjectItem>
-          </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f2">
         <cTool>
           <incDir>
             <pElem>.</pElem>
+            <pElem>.</pElem>
           </incDir>
         </cTool>
         <ccTool>
           <incDir>
             <pElem>.</pElem>
+            <pElem>.</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f2</output>
-          <linkerLibItems>
-            <linkerLibProjectItem>
-              <makeArtifact PL="D:/projects/git/utils"
-                            CT="3"
-                            CN="Debug"
-                            AC="true"
-                            BL="false"
-                            WD="D:/projects/git/utils"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.a">
-              </makeArtifact>
-            </linkerLibProjectItem>
-          </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f4">
         <cTool>
           <incDir>
             <pElem>.</pElem>
@@ -198,21 +205,7 @@
           </incDir>
         </ccTool>
         <linkerTool>
-          <output>${TESTDIR}/TestFiles/f3</output>
-          <linkerLibItems>
-            <linkerLibProjectItem>
-              <makeArtifact PL="D:/projects/git/utils"
-                            CT="3"
-                            CN="Debug"
-                            AC="true"
-                            BL="false"
-                            WD="D:/projects/git/utils"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libutils.a">
-              </makeArtifact>
-            </linkerLibProjectItem>
-          </linkerLibItems>
+          <output>${TESTDIR}/TestFiles/f4</output>
         </linkerTool>
       </folder>
       <item path="final.h" ex="false" tool="3" flavor2="0">
@@ -239,7 +232,13 @@
       </item>
       <item path="tests/newsimpletest.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="tests/testACGB.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="tests/testACGBi.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/testKBN1125_0518.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="yc.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -268,11 +267,6 @@
         <archiverTool>
         </archiverTool>
       </compileType>
-      <item path="D:/projects/git/final/tests/testACGB.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="bonds.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bonds.h" ex="false" tool="3" flavor2="0">
@@ -318,6 +312,21 @@
           <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
       <folder path="TestFiles/f3">
         <cTool>
           <incDir>
@@ -357,7 +366,13 @@
       </item>
       <item path="tests/newsimpletest.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="tests/testACGB.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="tests/testACGBi.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/testKBN1125_0518.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="yc.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -46,6 +46,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/linkers.o \
 	${OBJECTDIR}/moneymarket.o \
 	${OBJECTDIR}/security.o \
+	${OBJECTDIR}/utils.o \
 	${OBJECTDIR}/yc.o
 
 # Test Directory
@@ -53,9 +54,10 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
+	${TESTDIR}/TestFiles/f4 \
+	${TESTDIR}/TestFiles/f1 \
 	${TESTDIR}/TestFiles/f3 \
-	${TESTDIR}/TestFiles/f2 \
-	${TESTDIR}/TestFiles/f1
+	${TESTDIR}/TestFiles/f2
 
 # C Compiler Flags
 CFLAGS=
@@ -138,6 +140,11 @@ ${OBJECTDIR}/security.o: security.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/security.o security.cpp
 
+${OBJECTDIR}/utils.o: utils.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/utils.o utils.cpp
+
 ${OBJECTDIR}/yc.o: yc.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -145,39 +152,48 @@ ${OBJECTDIR}/yc.o: yc.cpp
 
 # Subprojects
 .build-subprojects:
-	cd D\:/projects/git/utils && ${MAKE}  -f Makefile CONF=Debug
 
 # Build Test Targets
 .build-tests-conf: .build-conf ${TESTFILES}
-${TESTDIR}/TestFiles/f3: ${TESTDIR}/_ext/356306577/testACGB.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f4: ${TESTDIR}/tests/newsimpletest.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} D\:/projects/git/utils/dist/Debug/Cygwin_4.x-Windows/libutils.a 
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f4 $^ ${LDLIBSOPTIONS} 
 
-${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/testACGBi.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/testACGB.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} D\:/projects/git/utils/dist/Debug/Cygwin_4.x-Windows/libutils.a 
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/newsimpletest.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/testACGBi.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} D\:/projects/git/utils/dist/Debug/Cygwin_4.x-Windows/libutils.a 
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} 
 
-
-${TESTDIR}/_ext/356306577/testACGB.o: /cygdrive/D/projects/git/final/tests/testACGB.cpp 
-	${MKDIR} -p ${TESTDIR}/_ext/356306577
-	${RM} $@.d
-	$(COMPILE.cc) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/_ext/356306577/testACGB.o /cygdrive/D/projects/git/final/tests/testACGB.cpp
-
-
-${TESTDIR}/tests/testACGBi.o: tests/testACGBi.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
-	${RM} $@.d
-	$(COMPILE.cc) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/testACGBi.o tests/testACGBi.cpp
+${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/testKBN1125_0518.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} 
 
 
 ${TESTDIR}/tests/newsimpletest.o: tests/newsimpletest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} $@.d
-	$(COMPILE.cc) -g -I. -I. -I. -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/newsimpletest.o tests/newsimpletest.cpp
+	$(COMPILE.cc) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/newsimpletest.o tests/newsimpletest.cpp
+
+
+${TESTDIR}/tests/testACGB.o: tests/testACGB.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} $@.d
+	$(COMPILE.cc) -g -I. -I. -I. -I. -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/testACGB.o tests/testACGB.cpp
+
+
+${TESTDIR}/tests/testACGBi.o: tests/testACGBi.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} $@.d
+	$(COMPILE.cc) -g -I. -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/testACGBi.o tests/testACGBi.cpp
+
+
+${TESTDIR}/tests/testKBN1125_0518.o: tests/testKBN1125_0518.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} $@.d
+	$(COMPILE.cc) -g -I. -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/testKBN1125_0518.o tests/testKBN1125_0518.cpp
 
 
 ${OBJECTDIR}/bonds_nomain.o: ${OBJECTDIR}/bonds.o bonds.cpp 
@@ -323,6 +339,19 @@ ${OBJECTDIR}/security_nomain.o: ${OBJECTDIR}/security.o security.cpp
 	    ${CP} ${OBJECTDIR}/security.o ${OBJECTDIR}/security_nomain.o;\
 	fi
 
+${OBJECTDIR}/utils_nomain.o: ${OBJECTDIR}/utils.o utils.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/utils.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.cc) -g -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/utils_nomain.o utils.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/utils.o ${OBJECTDIR}/utils_nomain.o;\
+	fi
+
 ${OBJECTDIR}/yc_nomain.o: ${OBJECTDIR}/yc.o yc.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/yc.o`; \
@@ -340,9 +369,10 @@ ${OBJECTDIR}/yc_nomain.o: ${OBJECTDIR}/yc.o yc.cpp
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
+	    ${TESTDIR}/TestFiles/f4 || true; \
+	    ${TESTDIR}/TestFiles/f1 || true; \
 	    ${TESTDIR}/TestFiles/f3 || true; \
 	    ${TESTDIR}/TestFiles/f2 || true; \
-	    ${TESTDIR}/TestFiles/f1 || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi
@@ -354,7 +384,6 @@ ${OBJECTDIR}/yc_nomain.o: ${OBJECTDIR}/yc.o yc.cpp
 
 # Subprojects
 .clean-subprojects:
-	cd D\:/projects/git/utils && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl
