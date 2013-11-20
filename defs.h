@@ -18,7 +18,8 @@
 #define defsH
 
 /// The main version number of the library.
-#define FINAL_VERSION "0.1"
+#define FINAL_VERSION_NUMBER 1.0
+#define FINAL_VERSION "1.0"
 
 /// Build date.
 #ifdef __DATE__

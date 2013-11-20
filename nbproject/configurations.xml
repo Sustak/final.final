@@ -31,6 +31,7 @@
       <itemPath>coupons.cpp</itemPath>
       <itemPath>defs.cpp</itemPath>
       <itemPath>exceptions.cpp</itemPath>
+      <itemPath>final.cpp</itemPath>
       <itemPath>fixedincome.cpp</itemPath>
       <itemPath>floaters.cpp</itemPath>
       <itemPath>linkers.cpp</itemPath>
@@ -342,6 +343,8 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
+      <item path="final.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="final.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="fixedincome.cpp" ex="false" tool="1" flavor2="0">
