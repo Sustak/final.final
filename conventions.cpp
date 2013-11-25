@@ -50,12 +50,37 @@ floating YearFrac( const TDate& astart, const TDate& aend, int abasis )
     end=dummy_dt;
   }
 
+  start.Get( ds,ms,ys );
+  end.Get( de,me,ye );
+  
   ss=start.Serial();                  // pri vypoctu poctu dnu
   se=end.Serial();                    // se s tim ruzne hejba, proto si to
                                        // radsi zapamatujeme hned
+  
+  // ACT_ACT_ISDA je svou povahou trochu odlisna od ostatnich konvenci
+  // spocteme ji zvlast a rovnou vratime vysledek
+  if( abasis==ACT_ACT_ISDA || abasis==ACT_ACT_ISDA_NONEOM ) {
 
-  start.Get( ds,ms,ys );
-  end.Get( de,me,ye );
+      if( IsLeap(ys) ) {
+          denum = 366.0;
+      }
+      else {
+          denum = 365.0;
+      }
+      if( ys==ye ) {
+          return (se-ss)/denum;
+      }
+      
+      floating denumEnd;
+      if( IsLeap(ye) ) {
+          denumEnd = 366.0;
+      }
+      else {
+          denumEnd = 365.0;
+      }
+      int yearStartSerial = TDate(1,1,ye).Serial();
+      return (se-yearStartSerial)/denumEnd + (yearStartSerial-ss)/denum;
+  }
 
   num = 0;
   denum = 0;
@@ -187,7 +212,7 @@ int NDays( const TDate& afrom, const TDate& ato, int abasis )
   int de,me,ye;                        // day, month, year - end date
 
   int num=0;                           // 'num'erator
-
+  int yearStartSerial;
 
   afrom.Validate();
   ato.Validate();
@@ -234,6 +259,25 @@ int NDays( const TDate& afrom, const TDate& ato, int abasis )
     case ACT_365:                      // odecist seriovy cisla
       num = ato.Serial() - afrom.Serial();
       break;
+    case ACT_ACT_ISDA:      
+        floating denumNext, denumPrev;
+        if( ato.IsLeap() ) {
+            denumNext = 366.0;
+        }
+        else {
+            denumNext = 365.0;
+        }
+        if( afrom.IsLeap() ) {
+            denumPrev = 366.0;
+        }
+        else {
+            denumPrev = 365.0;
+        }
+        yearStartSerial = TDate(1,1,ye).Serial();
+        num = ( (ato.Serial()-yearStartSerial)*denumPrev
+                + (yearStartSerial-afrom.Serial())*denumNext ) / 365.0;
+        break;
+      
     case NL_360:
     case NL_365:
     case NL_ACT:
@@ -265,6 +309,22 @@ floating Denum( const TDate& prevcpn, const TDate& nextcpn,
     case NL_ACT:
       denum = nextcpn.Serial()-prevcpn.Serial();
       break;
+    case ACT_ACT_ISDA:
+        floating denumNext, denumPrev;
+        if( nextcpn.IsLeap() ) {
+            denumNext = 366.0;
+        }
+        else {
+            denumNext = 365.0;
+        }
+        if( prevcpn.IsLeap() ) {
+            denumPrev = 366.0;
+        }
+        else {
+            denumPrev = 365.0;
+        }
+        denum = denumNext * denumPrev / 365.0 / afrequency;
+        break;
     case ACT_360:
     case ISMA_30_360:
     case US_30_360:
